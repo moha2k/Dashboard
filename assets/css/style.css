@@ -1,0 +1,606 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    /* -------colors-------- */
+    --body-color: #e4e9f7;
+    --sidebar-color: #fff;
+    --primary-color: #695cfe;
+    --primary-color-light: #f6f5ff;
+    --toggle-color: #ddd;
+    --text-color: #707070;
+    /* -------transitions-------- */
+    --tran-02: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.4s ease;
+    --tran-05: all 0.5s ease;
+}
+body.dark{
+    --body-color: #18191a;
+    --sidebar-color: #242526;
+    --primary-color: #695cfe;
+    --primary-color-light: #3a383c;
+    --toggle-color: #fff;
+    --text-color: #ccc;
+}
+body{
+    height: 100vh;
+    background: var(--body-color);
+    transition: var(--tran-05);
+}
+
+/* ====sidebar==== */
+.sidebar header{
+    position: relative;
+}
+.sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    padding: 10px 14px;
+    background: var(--sidebar-color);
+    transition: var(--tran-05);
+}
+@media (max-width: 992px) {
+    .sidebar{
+        left: -300px;
+    }
+}
+@media (max-width: 480px){
+    .sidebar{
+        width: 100%;
+        left: -100%;
+        z-index: 1000;
+    }
+}
+.sidebar.active{
+    width: 88px;
+}
+@media (max-width: 992px){
+    .sidebar.active{
+        left: 0;
+        width: 300px;
+    }
+}
+@media (max-width: 480px){
+    .sidebar.active{
+        width: 100%;
+        left: 0;
+    }
+}
+/* ====Reusable CSS==== */
+.sidebar .text{
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-color);
+    transition: var(--tran-04);
+    white-space: nowrap;
+    opacity: 1;
+}
+.sidebar.active .text{
+    opacity: 0;
+}
+@media (max-width: 992px){
+    .sidebar.active .text{
+        opacity: 1;
+    } 
+}
+.sidebar .image{
+    min-width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sidebar li{
+    height: 50px;
+    margin-top: 10px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+.sidebar li .icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 60px;
+    font-size: 20px;
+}
+.sidebar li .icon,
+.sidebar li .text{
+    color: var(--text-color);
+    transition: var(--tran-02);
+}
+.sidebar .image-text img{
+    width: 40px;
+    border-radius: 6px;
+}
+.sidebar header .image-text{
+    display: flex;
+    align-items: center;
+}
+.sidebar .image-text .header-text{
+    display: flex;
+    flex-direction: column;
+}
+.header-text .name{
+    font-weight: 600;
+}
+.header-text .profession{
+    margin-top: -2px;
+}
+.sidebar header .toggle{
+    position: absolute;
+    top: 50%;
+    right: -25px;
+    transform: translateY(-50%) rotate(180deg);
+    height: 25px;
+    width: 25px;
+    background: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--toggle-color);
+    font-size: 22px;
+    transition: var(--tran-03);
+}
+
+.sidebar .menu{
+    margin-top: 20px;
+}
+
+.search-box input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-color);
+    background: var(--primary-color-light);
+}
+.sidebar li a{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: var(--tran-04);
+}
+.sidebar li a.active,
+.sidebar li a:hover{
+    background: var(--primary-color);
+}
+.sidebar li a:hover .icon,
+.sidebar li a:hover .text{
+    color: var(--sidebar-color);
+}
+.sidebar li a.active .icon,
+.sidebar li a.active .text{
+    color: var(--sidebar-color);
+}
+body.dark .sidebar li a:hover .icon,
+body.dark .sidebar li a:hover .text{
+    color: var(--text-color);
+}
+body.dark .sidebar li a.active .icon,
+body.dark .sidebar li a.active .text{
+    color: var(--text-color);
+}
+.sidebar .menu-bar{
+    height: calc(100% - 50px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.menu-bar .mode{
+    position: relative;
+    border-radius: 6px;
+    background: var(--primary-color-light);
+}
+.menu-bar .mode .moon-sun{
+    height: 50px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+}
+.menu-bar .mode i{
+    position: absolute;
+    transition: var(--tran-03);
+}
+.menu-bar .mode i.sun{
+    opacity: 0;
+}
+body.dark .menu-bar .mode i.sun{
+    opacity: 1;
+}
+body.dark .menu-bar .mode i.moon{
+    opacity: 0;
+}
+.menu-bar .mode .toggle-switch{
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-width: 60px;
+    cursor: pointer;
+    border-radius: 6px;
+    background: var(--primary-color-light);
+    transition: var(--tran-05);
+}
+.toggle-switch .switch{
+    position: relative;
+    height: 22px;
+    width: 44px;
+    border-radius: 25px;
+    background: var(--toggle-color);
+}
+.switch::before{
+    content: '';
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    background: var(--sidebar-color);
+    transition: var(--tran-03);
+}
+body.dark .switch::before{
+    left: 24px;
+}
+
+.main{
+    position: relative;
+    height: 100vh;
+    left: 250px;
+    width: calc(100% - 250px);
+    background: var(--body-color);
+    transition: var(--tran-05);
+    z-index: 101;
+}
+@media (max-width: 992px){
+    .main{
+        width: 100%;
+        left: 0;
+    }
+}
+.main .text{
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text-color);
+    padding: 8px 19px;
+}
+.main.active{
+    left: 88px;
+    width: calc(100% - 88px);
+}
+@media (max-width: 992px){
+    .main.active{
+        left: 300px;
+        width: calc(100% - 300px);
+    }
+}
+@media (max-width: 480px){
+    .main,
+    .main.active{
+        width: 100%;
+        left: 0;
+    }
+}
+.main .topbar{
+    width: 100%;
+    background: var(--sidebar-color);
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 12px;
+    transition: var(--tran-05);
+}
+.topbar .toggle{
+    font-size: 35px;
+    color: var(--text-color);
+    cursor: pointer;
+}
+@media (max-width: 480px){
+    .topbar .toggle.active{
+        z-index: 10000;
+        right: 0;
+        left: initial;
+        position: fixed;
+    }
+}
+.main .search{
+    position: relative;
+    width: 400px;
+    margin: 0 10px;
+}
+.main .search label{
+    position: relative;
+    width: 100%;
+}
+.main .search label input{
+    width: 100%;
+    height: 40px;
+    border-radius: 40px;
+    border: 1px solid var(--text-color);
+    outline: none;
+    padding: 5px 20px;
+    padding-left: 35px;
+    transition: var(--tran-05);
+    background: var(--primary-color-light);
+}
+.main .search label .bx{
+    position: absolute;
+    font-size: 23px;
+    left: 10px;
+    top: 2px;
+    color: var(--text-color);
+}
+.main .left{
+    display: flex;
+    align-items: center;
+    gap: 31px;
+}
+.left .theme-Toggler{
+    background: var(--primary-color-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 1.6rem;
+    width: 4.2rem;
+    cursor: pointer;
+    border-radius: 0.4rem;
+}
+.left .theme-Toggler span{
+    font-size: 1.2rem;
+    color: var(--text-color);
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.left .theme-Toggler span.active{
+    background: var(--primary-color);
+    color: var(--primary-color-light);
+    border-radius: 0.4rem;
+}
+.main .user{
+    position: relative;
+    min-width: 50px;
+    min-width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+.user img{
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+}
+.main .cardBox{
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+@media (max-width: 992px) {
+    .main .cardBox{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 480px){
+    .main .cardBox{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+.main .cardBox .card{
+    position: relative;
+    background: var(--primary-color-light);
+    border-radius: 6px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: var(--tran-05);
+}
+.main .cardBox .card:hover{
+    background: var(--text-color);
+    color: var(--primary-color-light);
+    transition: var(--tran-05);
+}
+.main .cardBox .card:hover .numbers,
+.main .cardBox .card:hover .cardName,
+.main .cardBox .card:hover .iconBox{
+    color: var(--primary-color-light);
+}
+.cardBox .card .numbers{
+    position: relative;
+    font-size: 2em;
+    font-weight: 500;
+    color: var(--text-color);
+}
+.cardBox .card .cardName{
+    color: var(--text-color);
+}
+.cardBox .card .iconBox{
+    font-size: 2.5em;
+    color: var(--text-color);
+}
+.main .details{
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    padding-top: 0;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 2fr 1fr;
+}
+@media (max-width: 768px) {
+    .main .details{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+.details .recentOrders{
+    position: relative;
+    min-height: 530px;
+    background: var(--sidebar-color);
+    padding: 20px;
+    border-radius: 6px;
+}
+@media (max-width: 480px){
+    .details .recentOrders{
+        overflow-y: auto;
+    }
+}
+.details .cardHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.cardHeader h2{
+    font-weight: 600;
+    color: var(--text-color);
+}
+@media (max-width: 768px){
+    .cardHeader h2{
+        font-weight: 600;
+        font-size: 18px;
+    } 
+}
+.cardHeader .btn{
+    position: relative;
+    padding: 5px 10px;
+    background: var(--body-color);
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: var(--tran-05);
+}
+.cardHeader .btn:hover{
+    background: var(--text-color);
+    color: var(--primary-color-light);
+}
+.details table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+.details table thead td{
+    font-weight: 600;
+}
+@media (max-width: 480px){
+    .details .recentOrders table{
+        width: 600px;
+    }
+}
+.details .recentOrders table tr{
+    border-bottom: 1px solid var(--text-color);
+    transition: var(--tran-03);
+    color: var(--text-color);
+}
+.details .recentOrders table tbody tr:last-child{
+    border: none;
+}
+.details .recentOrders table tbody tr:hover{
+    background: var(--primary-color);
+    color: var(--primary-color-light);
+}
+.details .recentOrders table thead tr td:last-child,
+.details .recentOrders table tbody tr td:last-child{
+    text-align: right;
+}
+body.dark .details .recentOrders table tbody tr:hover{
+    color: var(--text-color);
+}
+body.dark .details .recentOrders tbody td span:last-child{
+    color: var(--text-color);
+}
+.details .recentOrders table tr td{
+    padding: 9px 5px;
+}
+.status{
+    position: relative;
+    padding: 2px 4px;
+    color: var(--primary-color-light);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+.status.delivered{
+    background: #8de02c;
+}
+.status.pending{
+    background: #f9ca3f;
+}
+.status.return{
+    background: #f00;
+}
+.status.inprogress{
+    background: #1795ce;
+}
+.details .recentCustomers{
+    position: relative;
+    min-height: 530px;
+    background: var(--sidebar-color);
+    padding: 20px;
+    border-radius: 6px;
+}
+.details .recentCustomers .imgBox{
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.details .recentCustomers .imgBox img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.details .recentCustomers table tr td h4 span{
+    color: var(--text-color);
+    font-size: 14px;
+}
+.details .recentCustomers table tr:hover,
+.details .recentCustomers table tr:hover td h4 span{
+    background: var(--primary-color);
+    color: var(--primary-color-light);
+}
+.details .recentCustomers table tr td{
+    padding: 7px 10px;
+}
+.details .recentCustomers table tr td h4{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.2em;
+}
+.details .recentCustomers table tr td h4 span{
+    color: var(--text-color);
+    font-size: 14px;
+}
